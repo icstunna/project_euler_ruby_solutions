@@ -9,6 +9,22 @@ require "Prime"
 range = *(1..20)
 
 def highest_frequency_divisors(range_array)
+  highest_frequency_divisors_hash = Hash.new(0)
+  array_of_divisors = prime_divisors(range_array)
+  array_of_divisors.each do |divisor_hash|
+    max_frequency = 0
+    divisor_hash.each do |prime, frequency|
+      if highest_frequency_divisors_hash[prime] == 0
+        highest_frequency_divisors_hash[prime] = frequency
+      elsif highest_frequency_divisors_hash[prime] < frequency
+        highest_frequency_divisors_hash[prime] = frequency
+      end
+    end
+  end
+  return highest_frequency_divisors_hash
+end
+
+def prime_divisors(range_array)
   divisors_array = []
   range_array.each do |integer|
     divisor_frequency_hash = integer_divisors(integer, 1)
@@ -44,5 +60,6 @@ def next_prime(divisor)
   end
 end
 
-p highest_frequency_divisors(range)
+# p prime_divisors(range)
 # p integer_divisors(2, 1)
+p highest_frequency_divisors(range)
