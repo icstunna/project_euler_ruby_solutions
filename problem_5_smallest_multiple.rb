@@ -8,6 +8,15 @@ require "Prime"
 
 range = *(1..20)
 
+def highest_frequency_divisors(range_array)
+  divisors_array = []
+  range_array.each do |integer|
+    divisor_frequency_hash = integer_divisors(integer, 1)
+    divisors_array << divisor_frequency_hash
+  end
+  return divisors_array
+end
+
 def integer_divisors(int, divisor, hash = Hash.new(0))
   divisor_frequency = hash
   if int == 1
@@ -15,14 +24,14 @@ def integer_divisors(int, divisor, hash = Hash.new(0))
   elsif divisor == 1
     divisor_frequency[divisor] += 1
     divisor = next_prime(divisor)
-    integer_divisors(int, divisor, divisor_frequency)
+    return integer_divisors(int, divisor, divisor_frequency)
   elsif int % divisor != 0
     divisor = next_prime(divisor)
-    integer_divisors(int, divisor, divisor_frequency)
+    return integer_divisors(int, divisor, divisor_frequency)
   else
     int = int / divisor
     divisor_frequency[divisor] += 1
-    integer_divisors(int, divisor, divisor_frequency)
+    return integer_divisors(int, divisor, divisor_frequency)
   end
 end
 
@@ -35,4 +44,5 @@ def next_prime(divisor)
   end
 end
 
-p integer_divisors(20,1)
+p highest_frequency_divisors(range)
+# p integer_divisors(2, 1)
