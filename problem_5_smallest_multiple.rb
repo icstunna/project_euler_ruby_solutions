@@ -8,6 +8,22 @@ require "Prime"
 
 range = *(1..20)
 
+def smallest_positive_number_divisible_by_all_numbers_of_range(range_array)
+  smallest_number_array = multiples_to_smallest_integer_divisible_by_range(range_array)
+  smallest_number_array.inject(:*)
+end
+
+def multiples_to_smallest_integer_divisible_by_range(range_array)
+  array_of_multiples = []
+  hash_of_divisors_with_highest_freq = highest_frequency_divisors(range_array)
+  hash_of_divisors_with_highest_freq.each do |key, value|
+    value.times do
+      array_of_multiples << key
+    end
+  end
+  return array_of_multiples
+end
+
 def highest_frequency_divisors(range_array)
   highest_frequency_divisors_hash = Hash.new(0)
   array_of_divisors = prime_divisors(range_array)
@@ -62,4 +78,6 @@ end
 
 # p prime_divisors(range)
 # p integer_divisors(2, 1)
-p highest_frequency_divisors(range)
+# p highest_frequency_divisors(range)
+# p multiples_to_smallest_integer_divisible_by_range(range)
+p smallest_positive_number_divisible_by_all_numbers_of_range(range)
