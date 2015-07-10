@@ -24,4 +24,4 @@ def nth_prime(int, n, count = 0)
 end
 
 # p next_prime(1000)
-p nth_prime(1, 8000)
+p nth_prime(1, 8151)
