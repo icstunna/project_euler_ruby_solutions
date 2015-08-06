@@ -12,16 +12,13 @@ def next_prime(int)
   end
 end
 
-def nth_prime(int, n, count = 0)
-  int = next_prime(int)
-  count = count
-  if count == n
-    return int
-  else
+def nth_prime(int, n, count = 0) #iterate with while loop
+  while count < n
+    int = next_prime(int)
     count += 1
-    nth_prime(int, n, count)
   end
+  return int
 end
 
 # p next_prime(1000)
-p nth_prime(1, 8151)
+p nth_prime(1, 10001)
